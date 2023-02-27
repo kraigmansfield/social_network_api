@@ -42,4 +42,6 @@ const userController = {
     },
 }
 
-modules.exports = userController;
+if (typeof module === 'object') {
+    module.exports = userController;
+}
