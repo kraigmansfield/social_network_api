@@ -10,7 +10,7 @@ const thoughtController = {
         });
     },
 
-    getOneThought({params}, res) {
+    getOneThought(req, res) {
         Thought.findOne({_id:params.thoughtId})
         .then(data => {
             if (!data) {

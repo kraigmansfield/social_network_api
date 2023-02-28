@@ -9,8 +9,8 @@ const userController = {
         });
     },
 
-    getOneUser({params},res){
-        User.findOne({_id:params.id})
+    getOneUser(req,res){
+        User.findOne({_id:req.params.userId})
         .populate('thoughts')
         .populate('friends')
         .select('-__v')
@@ -19,6 +19,7 @@ const userController = {
                 res.status(404).json({msg:"No user with this Id"});
                 return;
             }
+            res.json(data);
         }).catch(err=> {
             console.log(err);
             res.status(400).json(err);
@@ -30,8 +31,8 @@ const userController = {
         .catch(err => res.status(400).json(err));
     },
 
-    deleteUser({params}, res) {
-        User.findOneAndDelete({_id:params.id})
+    deleteUser(req, res) {
+        User.findOneAndDelete({_id:req.params.userId})
         .then(data=>{
             if (!data) {
                 return res.status(404).json({msg:"No user with this Id"});
